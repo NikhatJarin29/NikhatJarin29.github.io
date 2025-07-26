@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Delay Inquiry Form - Nikhat Jarin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f9f7fe;
+        }
+        
+        .form-container {
+            background: linear-gradient(to bottom right, #f3f0ff, #e6f7f2);
+            border: 2px solid #d8c8ff;
+        }
+        
+        .section-header {
+            background: linear-gradient(to right, #b197fc, #86e3ce);
+        }
+        
+        input[type="text"], 
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        textarea,
+        select {
+            border: 2px solid #d8c8ff;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s;
+        }
+        
+        input[type="text"]:focus, 
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #9775fa;
+            box-shadow: 0 0 0 3px rgba(151, 117, 250, 0.3);
+            outline: none;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            accent-color: #9775fa;
+        }
+        
+        .radio-container {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .radio-container input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            accent-color: #9775fa;
+        }
+        
+        button {
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(151, 117, 250, 0.4);
+        }
+        
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .heart-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        <div class="form-container w-full max-w-4xl rounded-xl shadow-lg overflow-hidden mb-8">
+            <div class="bg-gradient-to-r from-purple-300 to-green-200 py-6 px-8 text-center">
+                <h1 class="text-3xl font-bold text-purple-900">Speech Delay Inquiry Form</h1>
+                <p class="text-lg text-purple-800 mt-2">Nikhat Jarin</p>
+            </div>
+            
+            <div class="p-8">
+                <div class="mb-8 text-center bg-white bg-opacity-70 p-6 rounded-lg shadow-sm">
+                    <p class="text-xl font-medium text-purple-800">
+                        <span class="text-yellow-500 heart-pulse inline-block">💛</span> 
+                        Thank you for reaching out. You're not alone — and you're in the right place.
+                    </p>
+                    <p class="mt-4 text-gray-700">
+                        Please fill out this form so we can better understand your child's needs and guide you with clarity and care.
+                    </p>
+                </div>
+                
+                <form id="speechDelayForm" action="https://formsubmit.co/nikhatjarin29@gmail.com" method="POST" class="space-y-8">
+                    <!-- Hidden fields for FormSubmit configuration -->
+                    <input type="hidden" name="_subject" value="New Speech Delay Inquiry Form Submission">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" id="nextUrl" value="">
+                    
+                    <!-- Child's Details Section -->
+                    <div class="bg-white bg-opacity-80 rounded-lg p-6 shadow-sm">
+                        <div class="section-header rounded-lg py-2 px-4 mb-4">
+                            <h2 class="text-xl font-bold text-white flex items-center">
+                                <span class="emoji">👶</span> Child's Details
+                            </h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name:</label>
+                                <input type="text" name="childName" class="w-full px-4 py-2 rounded-lg" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth:</label>
+                                <input type="date" name="dob" class="w-full px-4 py-2 rounded-lg" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Gender:</label>
+                                <select name="gender" class="w-full px-4 py-2 rounded-lg">
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Primary Language Spoken at Home:</label>
+                                <input type="text" name="primaryLanguage" class="w-full px-4 py-2 rounded-lg">
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Any other languages exposed to?</label>
+                                <input type="text" name="otherLanguages" class="w-full px-4 py-2 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Developmental History Section -->
+                    <div class="bg-white bg-opacity-80 rounded-lg p-6 shadow-sm">
+                        <div class="section-header rounded-lg py-2 px-4 mb-4">
+                            <h2 class="text-xl font-bold text-white flex items-center">
+                                <span class="emoji">🧠</span> Developmental History
+                            </h2>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Was your child born full-term?</label>
+                                <div class="flex flex-wrap">
+                                    <div class="radio-container">
+                                        <input type="radio" id="fullTermYes" name="fullTerm" value="yes">
+                                        <label for="fullTermYes">Yes</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="fullTermNo" name="fullTerm" value="no">
+                                        <label for="fullTermNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="weeksContainer" class="hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">If no, how many weeks?</label>
+                                <input type="text" name="weeks" class="w-full sm:w-1/3 px-4 py-2 rounded-lg">
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Any birth complications?</label>
+                                <div class="flex flex-wrap">
+                                    <div class="radio-container">
+                                        <input type="radio" id="complicationsYes" name="complications" value="yes">
+                                        <label for="complicationsYes">Yes</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="complicationsNo" name="complications" value="no">
+                                        <label for="complicationsNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="complicationsContainer" class="hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">If yes, please specify:</label>
+                                <input type="text" name="complicationsDetails" class="w-full px-4 py-2 rounded-lg">
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Any known medical conditions or diagnoses?</label>
+                                <textarea name="medicalConditions" rows="2" class="w-full px-4 py-2 rounded-lg" placeholder="e.g., hearing issues, developmental delays, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Speech & Communication Section -->
+                    <div class="bg-white bg-opacity-80 rounded-lg p-6 shadow-sm">
+                        <div class="section-header rounded-lg py-2 px-4 mb-4">
+                            <h2 class="text-xl font-bold text-white flex items-center">
+                                <span class="emoji">🗣️</span> Speech & Communication
+                            </h2>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <p class="font-medium text-gray-700">Does your child:</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="babble" name="babble">
+                                    <label for="babble">Babble or make sounds?</label>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="singleWords" name="singleWords">
+                                    <label for="singleWords">Say single words?</label>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="combineWords" name="combineWords">
+                                    <label for="combineWords">Combine 2 or more words?</label>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="followInstructions" name="followInstructions">
+                                    <label for="followInstructions">Follow simple instructions?</label>
+                                </div>
+                                
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="respondName" name="respondName">
+                                    <label for="respondName">Respond to their name?</label>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Approximate number of words your child currently uses:</label>
+                                <div class="flex flex-wrap">
+                                    <div class="radio-container">
+                                        <input type="radio" id="words0-10" name="wordCount" value="0-10">
+                                        <label for="words0-10">0–10</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="words10-50" name="wordCount" value="10-50">
+                                        <label for="words10-50">10–50</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="words50-100" name="wordCount" value="50-100">
+                                        <label for="words50-100">50–100</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="words100plus" name="wordCount" value="100+">
+                                        <label for="words100plus">100+</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Does your child mostly use:</label>
+                                <div class="flex flex-wrap">
+                                    <div class="radio-container">
+                                        <input type="radio" id="useWords" name="communication" value="words">
+                                        <label for="useWords">Words</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="useGestures" name="communication" value="gestures">
+                                        <label for="useGestures">Gestures</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="useSounds" name="communication" value="sounds">
+                                        <label for="useSounds">Sounds</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="usePointing" name="communication" value="pointing">
+                                        <label for="usePointing">Pointing</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Any specific words or phrases your child often repeats?</label>
+                                <textarea name="repeatedPhrases" rows="2" class="w-full px-4 py-2 rounded-lg"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Home & Social Environment Section -->
+                    <div class="bg-white bg-opacity-80 rounded-lg p-6 shadow-sm">
+                        <div class="section-header rounded-lg py-2 px-4 mb-4">
+                            <h2 class="text-xl font-bold text-white flex items-center">
+                                <span class="emoji">🏡</span> Home & Social Environment
+                            </h2>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Does your child attend any daycare, playschool, or group setting?</label>
+                                <div class="flex flex-wrap">
+                                    <div class="radio-container">
+                                        <input type="radio" id="daycareYes" name="daycare" value="yes">
+                                        <label for="daycareYes">Yes</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="daycareNo" name="daycare" value="no">
+                                        <label for="daycareNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="daycareHoursContainer" class="hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">If yes, how many hours per day?</label>
+                                <input type="text" name="daycareHours" class="w-full sm:w-1/3 px-4 py-2 rounded-lg">
+                            </div>
+                            
+                            <div class="mt-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">How many hours of screen time per day (TV, phone, tablet)?</label>
+                                <div class="flex flex-wrap">
+                                    <div class="radio-container">
+                                        <input type="radio" id="screen0" name="screenTime" value="0">
+                                        <label for="screen0">0</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="screenLess1" name="screenTime" value="<1">
+                                        <label for="screenLess1">&lt;1 hr</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="screen1-2" name="screenTime" value="1-2">
+                                        <label for="screen1-2">1–2 hrs</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="screen2plus" name="screenTime" value="2+">
+                                        <label for="screen2plus">2+ hrs</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Do you or family members read, sing, or play verbally with the child?</label>
+                                <div class="flex flex-wrap">
+                                    <div class="radio-container">
+                                        <input type="radio" id="verbalDaily" name="verbalInteraction" value="daily">
+                                        <label for="verbalDaily">Daily</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="verbalOccasionally" name="verbalInteraction" value="occasionally">
+                                        <label for="verbalOccasionally">Occasionally</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="verbalRarely" name="verbalInteraction" value="rarely">
+                                        <label for="verbalRarely">Rarely</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Concerns & Observations Section -->
+                    <div class="bg-white bg-opacity-80 rounded-lg p-6 shadow-sm">
+                        <div class="section-header rounded-lg py-2 px-4 mb-4">
+                            <h2 class="text-xl font-bold text-white flex items-center">
+                                <span class="emoji">❤️</span> Your Concerns & Observations
+                            </h2>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">When did you first become concerned about your child's speech?</label>
+                                <textarea name="concernTime" rows="2" class="w-full px-4 py-2 rounded-lg"></textarea>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">What are your main concerns right now?</label>
+                                <textarea name="mainConcerns" rows="3" class="w-full px-4 py-2 rounded-lg"></textarea>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">What does your child enjoy doing most?</label>
+                                <textarea name="childEnjoys" rows="2" class="w-full px-4 py-2 rounded-lg"></textarea>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Have you sought any prior assessment or therapy?</label>
+                                <textarea name="priorTherapy" rows="2" class="w-full px-4 py-2 rounded-lg"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Parent/Guardian Contact Section -->
+                    <div class="bg-white bg-opacity-80 rounded-lg p-6 shadow-sm">
+                        <div class="section-header rounded-lg py-2 px-4 mb-4">
+                            <h2 class="text-xl font-bold text-white flex items-center">
+                                <span class="emoji">📩</span> Parent/Guardian Contact
+                            </h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Name:</label>
+                                <input type="text" name="parentName" class="w-full px-4 py-2 rounded-lg" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number:</label>
+                                <input type="tel" name="phoneNumber" class="w-full px-4 py-2 rounded-lg" required>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email:</label>
+                                <input type="email" name="email" class="w-full px-4 py-2 rounded-lg" required>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Preferred way to receive feedback:</label>
+                                <div class="flex flex-wrap">
+                                    <div class="radio-container">
+                                        <input type="radio" id="feedbackWhatsApp" name="feedbackPreference" value="whatsapp">
+                                        <label for="feedbackWhatsApp">WhatsApp</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="feedbackEmail" name="feedbackPreference" value="email">
+                                        <label for="feedbackEmail">Email</label>
+                                    </div>
+                                    <div class="radio-container">
+                                        <input type="radio" id="feedbackCall" name="feedbackPreference" value="call">
+                                        <label for="feedbackCall">Call</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Next Step Section -->
+                    <div class="bg-white bg-opacity-80 rounded-lg p-6 shadow-sm">
+                        <div class="section-header rounded-lg py-2 px-4 mb-4">
+                            <h2 class="text-xl font-bold text-white flex items-center">
+                                <span class="emoji">✅</span> Next Step
+                            </h2>
+                        </div>
+                        
+                        <p class="text-gray-700">
+                            Once we receive your form, we'll review your responses and get back to you with a customized feedback + plan of action to support your child's speech development.
+                        </p>
+                    </div>
+                    
+                    <div class="flex justify-center space-x-4">
+                        <button type="submit" id="submitBtn" class="bg-gradient-to-r from-purple-500 to-green-400 text-white font-bold py-3 px-8 rounded-full shadow-md">
+                            Submit Form
+                        </button>
+                        <button type="button" id="downloadBtn" class="bg-gradient-to-r from-purple-400 to-blue-400 text-white font-bold py-3 px-8 rounded-full shadow-md">
+                            Download as PDF
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4 text-center">
+            <div class="text-5xl mb-4">✅</div>
+            <h3 class="text-2xl font-bold text-purple-800 mb-4">Form Submitted Successfully!</h3>
+            <p class="text-gray-700 mb-6">Thank you for providing this information. We'll review your responses and get back to you soon with a customized plan.</p>
+            <button id="closeModalBtn" class="bg-gradient-to-r from-purple-500 to-green-400 text-white font-bold py-2 px-6 rounded-full">
+                Close
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Set the success redirect URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUrl = window.location.origin + window.location.pathname;
+            document.getElementById('nextUrl').value = currentUrl + '?success=true';
+        });
+        
+        // Show/hide conditional fields based on radio button selections
+        document.querySelectorAll('input[name="fullTerm"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('weeksContainer').classList.toggle('hidden', this.value !== 'no');
+            });
+        });
+        
+        document.querySelectorAll('input[name="complications"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('complicationsContainer').classList.toggle('hidden', this.value !== 'yes');
+            });
+        });
+        
+        document.querySelectorAll('input[name="daycare"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('daycareHoursContainer').classList.toggle('hidden', this.value !== 'yes');
+            });
+        });
+        
+        // Form submission
+        document.getElementById('speechDelayForm').addEventListener('submit', function(e) {
+            // Let FormSubmit handle the submission
+            // The form will be submitted normally to FormSubmit
+            // Success page will be handled by FormSubmit's redirect
+        });
+        
+        // Check if we're returning from FormSubmit (look for success parameter in URL)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            document.getElementById('successModal').classList.remove('hidden');
+            // Clean up the URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+        
+        document.getElementById('closeModalBtn').addEventListener('click', function() {
+            document.getElementById('successModal').classList.add('hidden');
+        });
+        
+        // PDF Download functionality
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            
+            // Create a new PDF document
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+            
+            // Get the form element
+            const formElement = document.querySelector('.form-container');
+            
+            // Use html2canvas to capture the form as an image
+            html2canvas(formElement, {
+                scale: 2,
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                // Calculate the width and height to maintain aspect ratio
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
+                // Add the image to the PDF
+                const imgData = canvas.toDataURL('image/png');
+                
+                // Split into multiple pages if needed
+                let heightLeft = imgHeight;
+                let position = 0;
+                let page = 1;
+                
+                // Add first page
+                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                // Add subsequent pages if needed
+                while (heightLeft > 0) {
+                    position = -pageHeight * page;
+                    doc.addPage();
+                    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                    page++;
+                }
+                
+                // Save the PDF
+                doc.save('Speech_Delay_Inquiry_Form.pdf');
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9653ee9c90f6578d',t:'MTc1MzUzMzI3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
